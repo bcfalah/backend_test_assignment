@@ -1,1 +1,2 @@
 CARS_RECOMMENDATION_API_URL: "https://bravado-images-production.s3.amazonaws.com"
+RECOMMENDED_CARS_PER_PAGE: 10

@@ -22,6 +22,9 @@ class CarsRecommendationService
             and users.id = #{user.id}")
 
     base_query = join_with_ai_recommended_cars(base_query)
+    base_query = base_query.where("brands.name ilike ?", "%#{brand_name}%") if brand_name.present?
+    base_query = base_query.where("price >= ?", price_min) if price_min.present?
+    base_query = base_query.where("price <= ?", price_max) if price_max.present?
     base_query.order('price_in_range DESC NULLS LAST, ai_recommended DESC NULLS LAST, price ASC')
   end
 

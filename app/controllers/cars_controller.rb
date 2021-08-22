@@ -3,8 +3,7 @@ class CarsController < ApplicationController
 
   def recommended
     @cars = cars_recommendation_service.get_recommendations
-    # TODO make per_page configurable
-    render json: @cars.page(recommendations_page).per(10)
+    render json: @cars.page(recommendations_page).per(ENV['RECOMMENDED_CARS_PER_PAGE'])
   end
 
   private
