@@ -38,7 +38,6 @@ class CarsRecommendationService
   end
 
   # TODO this could be improved by having custom objects
-  # TODO add cache that expires every day
   def ai_recommended_cars_values
     ai_recommended_cars_values = []
     cars_recommendation_client.get_recommended_cars

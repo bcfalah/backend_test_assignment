@@ -7,7 +7,11 @@ module Clients
     end
 
     def get_recommended_cars
-      perform_get_request(recommended_cars_url, user_id: user_id)
+      # cache response for each user, expires at end of day
+      expires_in_seconds = Time.current.end_of_day - Time.current
+      Rails.cache.fetch("#{user_id}/recommended_cars", expires_in: expires_in_seconds) do
+        perform_get_request(recommended_cars_url, user_id: user_id)
+      end
       self
     end
 
