@@ -9,11 +9,11 @@ class CarsRecommendationService
   end
 
   def get_recommendations
-    # is important to use left joins here, so all cars can be retrieved, and not only user's cars
+    # it is important to use left joins here, so all cars can be retrieved, and not only user's cars
     # price_in_range will be null for cars not preferred by the user
 
     # it is not the same to put user_id condition on the join or in the where
-    base_query = Car
+    base_query = Car.includes(:brand)
       .select("cars.*,
               preferred_price_range::int8range @> cars.price::bigint as price_in_range,
               rank_score")
